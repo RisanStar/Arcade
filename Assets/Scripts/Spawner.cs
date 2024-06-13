@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject car;
+    [SerializeField] private Vector2 spawnPoint;
+    [SerializeField] private float spawnRate;
+
+
+    private IEnumerator Spawn()
     {
-        
+        Instantiate(car, spawnPoint, Quaternion.identity);
+        yield return new WaitForSeconds(spawnRate);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        StartCoroutine(Spawn());
     }
 }

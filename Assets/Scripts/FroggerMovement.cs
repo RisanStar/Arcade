@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FroggerMovement : MonoBehaviour
 {
-    public bool isdead { get; private set; }
+    public bool isDead { get; private set; }
     private KeyCode upW = KeyCode.W;
     private KeyCode upArrow = KeyCode.UpArrow;
 
@@ -28,6 +26,7 @@ public class FroggerMovement : MonoBehaviour
     private void Start()
     {
         frog.transform.position = frog.transform.position;
+        isDead = false;
     }
 
     private void Update()
@@ -35,29 +34,48 @@ public class FroggerMovement : MonoBehaviour
         if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
         {
             newPosition.y += 1f;
-            transform.position = newPosition;
-       
+            frog.transform.position = newPosition;
+
         }
 
         else if (Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow))
         {
-      
+
             newPosition.y -= 1f;
-            transform.position = newPosition;
+            frog.transform.position = newPosition;
         }
 
-        else if(Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
+        else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
         {
             newPosition.x -= 1f;
-            transform.position = newPosition;
+            frog.transform.position = newPosition;
 
         }
 
-        else if(Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
+        else if (Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
         {
             newPosition.x += 1f;
-            transform.position = newPosition;
+            frog.transform.position = newPosition;
 
+        }
+
+        Die();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Car"))
+        {
+            isDead = true;
+        }
+    }
+
+    private void Die()
+    {
+        if (isDead)
+        {
+            Destroy(frog);
+            SceneManager.LoadScene("MainGame");
         }
     }
 }
