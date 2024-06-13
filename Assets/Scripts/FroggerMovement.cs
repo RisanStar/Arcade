@@ -59,6 +59,12 @@ public class FroggerMovement : MonoBehaviour
 
         }
 
+        if (frog.transform.position.y < 0f)
+        {
+            newPosition.y += 1f;
+            frog.transform.position = newPosition;
+        }
+
         Die();
     }
 

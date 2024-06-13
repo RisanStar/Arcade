@@ -4,19 +4,40 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject car;
-    [SerializeField] private Vector2 spawnPoint;
-    [SerializeField] private float spawnRate;
+    private float carCount = 0f;
+    private float carTimer;
+    private bool canSpawn;
 
+    [SerializeField] private GameObject car;
+    private Vector3 spawnPoint;
+
+    private void Start()
+    {
+        spawnPoint = transform.position;
+    }
 
     private IEnumerator Spawn()
     {
-        Instantiate(car, spawnPoint, Quaternion.identity);
-        yield return new WaitForSeconds(spawnRate);
+        carTimer = Random.Range(1f, 2f);
+        if (canSpawn) 
+        {
+            Instantiate(car, spawnPoint, Quaternion.identity);
+            yield return new WaitForSeconds(carCount);
+        }     
     }
 
     private void Update()
     {
+        carCount -= 1f * Time.deltaTime;
+        if (carCount <= 0f) { carCount = 0f; }
+        if (carCount == 0f)
+        {
+            canSpawn = true;
+            carCount += carTimer;
+        }
+        else 
+            canSpawn = false;
+
         StartCoroutine(Spawn());
     }
 }

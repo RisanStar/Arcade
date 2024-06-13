@@ -11,16 +11,9 @@ public class Cars : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private FroggerMovement frogMove;
 
-    private IEnumerator SpeedChange()
-    {
-        speed = Random.Range(5f, 10f);
-        yield return new WaitForSeconds(2f);
-        speed = Random.Range(5f, 10f);
-    }
-
     private void Update()
     {
-        StartCoroutine(SpeedChange());
+        speed = Random.Range(5f, 20f);
         rb.velocity +=  speed * Time.deltaTime * Vector2.left; 
     }
 
