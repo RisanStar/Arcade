@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     private float carCount = 0f;
-    private float carTimer;
-    private bool canSpawn;
+    public float carTimer;
+    public bool canSpawn { get; private set; }
 
     [SerializeField] private GameObject car;
     private Vector3 spawnPoint;

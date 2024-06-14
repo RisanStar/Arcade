@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Cars : MonoBehaviour
@@ -11,9 +8,14 @@ public class Cars : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private FroggerMovement frogMove;
 
+    [SerializeField] private Spawner spawner;
     private void Update()
     {
-        speed = Random.Range(5f, 20f);
+        if (spawner.canSpawn)
+        {
+            speed = Random.Range(5f, 20f);
+        }
+        Debug.Log("Speed now equals: " + speed);
         rb.velocity +=  speed * Time.deltaTime * Vector2.left; 
     }
 
