@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour
     private IEnumerator Spawn()
     {
         carTimer = Random.Range(1f, 2f);
+        carTimer = Mathf.RoundToInt(carTimer);
         if (canSpawn) 
         {
             Instantiate(car, spawnPoint, Quaternion.identity);
@@ -28,6 +29,8 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        StartCoroutine(Spawn());
+
         carCount -= 1f * Time.deltaTime;
         if (carCount <= 0f) { carCount = 0f; }
         if (carCount == 0f)
@@ -38,6 +41,5 @@ public class Spawner : MonoBehaviour
         else 
             canSpawn = false;
 
-        StartCoroutine(Spawn());
     }
 }

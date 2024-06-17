@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class FroggerMovement : MonoBehaviour
 {
     public bool isDead { get; private set; }
+
     private KeyCode upW = KeyCode.W;
     private KeyCode upArrow = KeyCode.UpArrow;
 

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
+    private Cars cars;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Car"))
+        if (collision.CompareTag("Car"))
         {
-            Destroy(GameObject.FindWithTag("Car"));
+          Destroy(GameObject.FindWithTag("Car"));
+           
         }
     }
 }

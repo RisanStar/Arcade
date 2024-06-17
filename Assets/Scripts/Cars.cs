@@ -1,22 +1,51 @@
+using TMPro;
 using UnityEngine;
 
 public class Cars : MonoBehaviour
 {
     private float speed;
+    [SerializeField] private GameObject Left;
+    [SerializeField] private GameObject Right;
 
     [SerializeField] private GameObject car;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private FroggerMovement frogMove;
+    private Vector3 carPos;
+    public bool tooFar { get; private set; }
 
+    [SerializeField] private Rigidbody2D rb;
+
+    [SerializeField] private FroggerMovement frogMove;
     [SerializeField] private Spawner spawner;
+
+    private void Awake()
+    {
+        Left = GameObject.Find("LeftSpawner");
+        Right = GameObject.Find("RightSpawner");
+
+        spawner = FindAnyObjectByType<Spawner>();
+        frogMove = FindAnyObjectByType<FroggerMovement>();
+    }
+    private void Start()
+    {
+        carPos = transform.position;
+    }
     private void Update()
     {
         if (spawner.canSpawn)
         {
             speed = Random.Range(5f, 20f);
+            speed = Mathf.RoundToInt(speed);
         }
         Debug.Log("Speed now equals: " + speed);
-        rb.velocity +=  speed * Time.deltaTime * Vector2.left; 
+
+        if (Right.transform.position.x == carPos.x)
+        {
+            rb.velocity += speed * Time.deltaTime * Vector2.left;
+        }
+
+        if (Left.transform.position.x == carPos.x)
+        {
+            rb.velocity += speed * Time.deltaTime * Vector2.right;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +55,6 @@ public class Cars : MonoBehaviour
            if (frogMove.isDead == true)
            {
                speed = 0f;
-               rb.velocity += speed * Time.deltaTime * Vector2.left;
            }
         }
     }
