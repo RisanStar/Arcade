@@ -5,10 +5,23 @@ using UnityEngine;
 public class LvlDestroyer : MonoBehaviour
 {
     [SerializeField] private GameObject frog;
+    [SerializeField] FroggerMovement frogMove;
+    private Vector3 destroyerNewPos;
 
     private void Update()
     {
-        transform.position = frog.transform.position;
+        if (frogMove.canMoveUp == true)
+        {
+            destroyerNewPos.y += 1f;
+            transform.position = destroyerNewPos;
+        }
+
+        if (frogMove.canMoveDown == true)
+        {
+            destroyerNewPos.y -= 1f;
+            transform.position = destroyerNewPos;
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

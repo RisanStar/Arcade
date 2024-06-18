@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class FroggerMovement : MonoBehaviour
 {
     public bool isDead { get; private set; }
+    public bool canMoveUp { get; private set; }
+    public bool canMoveDown { get; private set; }
 
     private KeyCode upW = KeyCode.W;
     private KeyCode upArrow = KeyCode.UpArrow;
@@ -28,6 +30,8 @@ public class FroggerMovement : MonoBehaviour
     {
         frog.transform.position = frog.transform.position;
         isDead = false;
+        canMoveUp = false;
+        canMoveDown = false;
     }
 
     private void Update()
@@ -36,6 +40,7 @@ public class FroggerMovement : MonoBehaviour
         {
             newPosition.y += 1f;
             frog.transform.position = newPosition;
+            canMoveUp = true;
 
         }
 
@@ -44,6 +49,7 @@ public class FroggerMovement : MonoBehaviour
 
             newPosition.y -= 1f;
             frog.transform.position = newPosition;
+            canMoveDown = true;
         }
 
         else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
@@ -58,6 +64,11 @@ public class FroggerMovement : MonoBehaviour
             newPosition.x += 1f;
             frog.transform.position = newPosition;
 
+        }
+        else
+        {
+            canMoveUp = false;
+            canMoveDown = false;
         }
 
         if (frog.transform.position.y < 0f)

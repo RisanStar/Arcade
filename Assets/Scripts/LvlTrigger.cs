@@ -5,7 +5,6 @@ using UnityEngine;
 public class LvlTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject[] lvlVariant;
-    [SerializeField] private GameObject frog;
 
     private Vector3 lvlSpawn;
 
@@ -18,12 +17,12 @@ public class LvlTrigger : MonoBehaviour
     private void Start()
     {
         lvlSpawn = new Vector3 (transform.position.x, transform.position.y + 5, transform.position.z);
-
     }
     private void Update()
     {
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,7 +32,7 @@ public class LvlTrigger : MonoBehaviour
             if (randomLvl == 0)
             {
                 Instantiate(lvlVariant[0], lvlSpawn, Quaternion.identity);
-                if (GameObject.FindWithTag("LvlVari"))
+                if (GameObject.Find("Level Variant(1)"))
                 {
                     lvlVariant[0].SetActive(true);
                 }
@@ -42,7 +41,7 @@ public class LvlTrigger : MonoBehaviour
             if (randomLvl == 1)
             {
                 Instantiate(lvlVariant[1], lvlSpawn, Quaternion.identity);
-                if (GameObject.FindWithTag("LvlVari"))
+                if (GameObject.Find("Level Variant(2)"))
                 {
                     lvlVariant[1].SetActive(true);
                 }
