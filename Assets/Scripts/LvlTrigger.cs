@@ -14,9 +14,6 @@ public class LvlTrigger : MonoBehaviour
     {
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
-
-        lvlVariant[0] = GameObject.Find("Level Variant(1)");
-        lvlVariant[1] = GameObject.Find("Level Variant(2)");
     }
     private void Start()
     {
