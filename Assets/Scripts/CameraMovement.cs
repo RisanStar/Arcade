@@ -10,6 +10,5 @@ public class CameraMovement : MonoBehaviour
     private void Update()
     {
         transform.position = new Vector3(transform.position.x, frog.transform.position.y, transform.position.z); 
-
     }
 }

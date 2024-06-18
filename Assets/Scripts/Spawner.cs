@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         spawnPoint = transform.position;
+        StartCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()

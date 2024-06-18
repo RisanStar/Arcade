@@ -13,16 +13,13 @@ public class Cars : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
-    [SerializeField] private FroggerMovement frogMove;
     [SerializeField] private Spawner spawner;
 
     private void Awake()
     {
         Left = GameObject.Find("LeftSpawner");
         Right = GameObject.Find("RightSpawner");
-
-        spawner = FindAnyObjectByType<Spawner>();
-        frogMove = FindAnyObjectByType<FroggerMovement>();
+        spawner = FindAnyObjectByType<Spawner>();;
     }
     private void Start()
     {
@@ -35,7 +32,6 @@ public class Cars : MonoBehaviour
             speed = Random.Range(5f, 20f);
             speed = Mathf.RoundToInt(speed);
         }
-        Debug.Log("Speed now equals: " + speed);
 
         if (Right.transform.position.x == carPos.x)
         {
@@ -45,17 +41,6 @@ public class Cars : MonoBehaviour
         if (Left.transform.position.x == carPos.x)
         {
             rb.velocity += speed * Time.deltaTime * Vector2.right;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Frog"))
-        {
-           if (frogMove.isDead == true)
-           {
-               speed = 0f;
-           }
         }
     }
 }
