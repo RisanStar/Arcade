@@ -25,7 +25,7 @@ public class LvlDestroyer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("LvlVari"))
+        if (collision.CompareTag("LvlVari") || collision.CompareTag("Car")) 
         {
             Destroy(collision.gameObject);
         }

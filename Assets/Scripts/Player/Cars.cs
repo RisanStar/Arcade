@@ -42,5 +42,6 @@ public class Cars : MonoBehaviour
         {
             rb.velocity += speed * Time.deltaTime * Vector2.right;
         }
+
     }
 }
