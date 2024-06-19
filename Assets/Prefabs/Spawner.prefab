@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2350802410063744766
 Transform:
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2589d3aeedb78418107233f31a950f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carTimer: 0
   car: {fileID: 1851167845049300692, guid: 6d99649f4a7c4c4419de0b11928ffbec, type: 3}
-  spawnRate: 5

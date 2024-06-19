@@ -980,6 +980,7 @@ MonoBehaviour:
   lvlVariant:
   - {fileID: 5554007363028708453, guid: 25c64fdeeb5188149b79ce0198f3868b, type: 3}
   - {fileID: 1961439612838836509}
+  berry: {fileID: 7709621591330869548, guid: 42369e5361b93574cb5204f7a8e9934a, type: 3}
 --- !u!1 &7588479324429261428
 GameObject:
   m_ObjectHideFlags: 0

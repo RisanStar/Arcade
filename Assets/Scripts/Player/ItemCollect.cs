@@ -1,13 +1,16 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ItemCollect : MonoBehaviour
 {
     private int berryCount;
+    [SerializeField] private TextMeshProUGUI TMPUGUI;
 
     private void Start()
     {
         berryCount = 0;
+        TMPUGUI.text = "";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,6 +19,7 @@ public class ItemCollect : MonoBehaviour
         {
             Destroy(collision.gameObject);
             berryCount++;
+            TMPUGUI.text = "" + berryCount;
         }
     }
 

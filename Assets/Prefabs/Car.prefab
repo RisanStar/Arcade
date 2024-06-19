@@ -176,9 +176,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -203,6 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ecb7fd41face44b835babbcf13c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  frog: {fileID: 0}
   car: {fileID: 1851167845049300692}
   rb: {fileID: 3633039441013981478}
-  frogMove: {fileID: 0}
+  spawner: {fileID: 0}

@@ -1,34 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LvlTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject[] lvlVariant;
+    [SerializeField] private GameObject berry;
 
     private Vector3 lvlSpawn;
+    private Vector3 berrySpawn;
+
+    private float randX;
+    private float randY;
 
     private float randomLvl;
     private void Awake()
     {
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
+
+        randX = Random.Range(-10f, 10f);
+        randX = Mathf.RoundToInt(randX);
+
+        randY = Random.Range(5f, 10f);
+        randY = Mathf.RoundToInt(randY);
+
+        berrySpawn = new Vector3(randX, randY, transform.position.z);
     }
     private void Start()
     {
-        lvlSpawn = new Vector3 (transform.position.x, transform.position.y + 5, transform.position.z);
+        lvlSpawn = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+        berrySpawn = new Vector3(randX, randY + transform.position.y, transform.position.z);
     }
-    private void Update()
-    {
-        randomLvl = Random.value;
-        randomLvl = Mathf.RoundToInt(randomLvl);
 
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Frog"))
         {
             Debug.Log("Entered Trigger");
+            Instantiate(berry, berrySpawn, Quaternion.identity);
+
             if (randomLvl == 0)
             {
                 Instantiate(lvlVariant[0], lvlSpawn, Quaternion.identity);
