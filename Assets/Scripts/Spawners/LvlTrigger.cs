@@ -12,7 +12,7 @@ public class LvlTrigger : MonoBehaviour
     private float randX;
     private float randY;
 
-    private float randomLvl;
+    public float randomLvl { get; private set;}
     private void Awake()
     {
         randomLvl = Random.value;

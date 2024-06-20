@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Cars : MonoBehaviour
 {
-    private float speed;
+    [SerializeField] private float speed;
     [SerializeField] private GameObject Left;
     [SerializeField] private GameObject Right;
 
@@ -15,27 +15,25 @@ public class Cars : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private Spawner spawner;
-    private float lifeSpan = 0f;
 
     private void Awake()
     {
         Left = GameObject.Find("LeftSpawner");
         Right = GameObject.Find("RightSpawner");
 
-        spawner = FindAnyObjectByType<Spawner>();
+        spawner = FindObjectOfType<Spawner>();
         
     }
     private void Start()
     {
         carPos = transform.position;
-        lifeSpan -= 1f * Time.deltaTime;
     }
     private void Update()
     {
-        Debug.Log("Lifespan: " + lifeSpan);
+        // Debug.Log("Lifespan: " + lifeSpan);
         if (spawner.canSpawn)
         {
-            speed = Random.Range(5f, 20f);
+            speed = Random.Range(10f, 20f);
             speed = Mathf.RoundToInt(speed);
         }
 
@@ -49,13 +47,6 @@ public class Cars : MonoBehaviour
             rb.velocity += speed * Time.deltaTime * Vector2.right;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Out of Bounds") && lifeSpan == -3f)
-        {
-            Destroy(gameObject);
-        }
-    }
     
-    
+ 
 }

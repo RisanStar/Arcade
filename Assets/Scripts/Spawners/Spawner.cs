@@ -14,33 +14,27 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         spawnPoint = transform.position;
-        StartCoroutine(Spawn());
-    }
+        carTimer = 1.5f;
 
-    private IEnumerator Spawn()
-    {
-        carTimer = Random.Range(1f, 2f);
-        carTimer = Mathf.RoundToInt(carTimer);
-        if (canSpawn) 
-        {
-            Instantiate(car, spawnPoint, Quaternion.identity);
-            yield return new WaitForSeconds(carCount);
-        }     
     }
-
     private void Update()
     {
-        StartCoroutine(Spawn());
-
-        carCount -= 1f * Time.deltaTime;
-        if (carCount <= 0f) { carCount = 0f; }
-        if (carCount == 0f)
+        if (canSpawn)
         {
-            canSpawn = true;
-            carCount += carTimer;
+            Instantiate(car, spawnPoint, Quaternion.identity);
         }
-        else 
-            canSpawn = false;
 
+        {
+            carCount -= 1f * Time.deltaTime;
+            if (carCount <= 0f) { carCount = 0f; }
+            if (carCount == 0f)
+            {
+                canSpawn = true;
+                carCount += carTimer;
+            }
+            else
+                canSpawn = false;
+
+        }
     }
 }

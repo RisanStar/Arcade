@@ -5,11 +5,14 @@ using UnityEngine;
 public class LvlDestroyer : MonoBehaviour
 {
     [SerializeField] private GameObject frog;
-    [SerializeField] FroggerMovement frogMove;
+
+    [SerializeField] private FroggerMovement frogMove;
+
     private Vector3 destroyerNewPos;
 
     private void Update()
     {
+
         if (frogMove.canMoveUp == true)
         {
             destroyerNewPos.y += 1f;
@@ -30,4 +33,5 @@ public class LvlDestroyer : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
 }
