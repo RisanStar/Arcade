@@ -85,7 +85,7 @@ public class FroggerMovement3D : MonoBehaviour
             transform.position = newPosition;
         }
 
-        if (transform.position.x < -3f)
+        if (transform.position.x < -7f)
         {
             newPosition.x += 1f;
             transform.position = newPosition;
