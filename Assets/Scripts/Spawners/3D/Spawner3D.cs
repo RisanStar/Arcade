@@ -9,14 +9,16 @@ public class Spawner3D : MonoBehaviour
     public bool canSpawn { get; private set; }
 
     [SerializeField] private GameObject[] cars;
-    private Vector3 spawnPoint;
+    private Vector3 carSpawnPoint;
+    private Vector3 otherSpawnPoint;
 
     private float randomCar;
     private int pickedCar;
 
     private void Start()
     {
-        spawnPoint = new Vector3(transform.position.x, 1, transform.position.z);
+        carSpawnPoint = new Vector3(transform.position.x, .6f, transform.position.z);
+        otherSpawnPoint = new Vector3(transform.position.x, 1.4f, transform.position.z);
         carTimer = 3f;
 
     }
@@ -43,9 +45,14 @@ public class Spawner3D : MonoBehaviour
         }
 
 
-        if (canSpawn)
+        if (canSpawn && randomCar == 0 || canSpawn && randomCar == 2)
         {
-            Instantiate(cars[pickedCar], spawnPoint, Quaternion.identity);
+            Instantiate(cars[pickedCar], carSpawnPoint, Quaternion.identity);
+        }
+
+        if (canSpawn && randomCar == 1 || canSpawn && randomCar == 3)
+        {
+            Instantiate(cars[pickedCar], otherSpawnPoint, Quaternion.identity);
         }
 
         {

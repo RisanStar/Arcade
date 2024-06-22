@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 2391880}
   - component: {fileID: 4708335889922907629}
   - component: {fileID: -3486906529070164871}
+  - component: {fileID: 2490579611847573047}
   m_Layer: 0
   m_Name: Bus_Yellow
   m_TagString: Car
@@ -358,7 +359,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -386,11 +387,28 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2490579611847573047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc945243a4315b47b1ff77ee7209166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  rb: {fileID: -3486906529070164871}
+  Bcollider: {fileID: 4708335889922907629}
+  spawner: {fileID: 0}
+  car: {fileID: 0}
 --- !u!1 &189388
 GameObject:
   m_ObjectHideFlags: 0

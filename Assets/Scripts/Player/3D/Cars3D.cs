@@ -20,7 +20,6 @@ public class Cars3D : MonoBehaviour
     }
     private void Start()
     {
-        transform.position = new Vector3(transform.position.x, .6f, transform.position.z);
         Physics.IgnoreCollision(Bcollider, Bcollider);
     }
     private void Update()
