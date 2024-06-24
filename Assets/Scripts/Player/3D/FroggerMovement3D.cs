@@ -40,7 +40,7 @@ public class FroggerMovement3D : MonoBehaviour
 
         if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
         {
-            newPosition.z += 2f;
+            newPosition.z += 1f;
             transform.position = newPosition;
             canMoveUp = true;
 
@@ -49,21 +49,21 @@ public class FroggerMovement3D : MonoBehaviour
         else if (Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow))
         {
 
-            newPosition.z -= 2f;
+            newPosition.z -= 1f;
             transform.position = newPosition;
             canMoveDown = true;
         }
 
         else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
         {
-            newPosition.x -= 2f;
+            newPosition.x -= 1f;
             transform.position = newPosition;
 
         }
 
         else if (Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
         {
-            newPosition.x += 2f;
+            newPosition.x += 1f;
             transform.position = newPosition;
 
         }
@@ -75,19 +75,19 @@ public class FroggerMovement3D : MonoBehaviour
 
         if (transform.position.z < 0f)
         {
-            newPosition.z += 2f;
+            newPosition.z += 1f;
             transform.position = newPosition;
         }
 
         if (transform.position.x > 4f)
         {
-            newPosition.x -= 2f;
+            newPosition.x -= 1f;
             transform.position = newPosition;
         }
 
         if (transform.position.x < -7f)
         {
-            newPosition.x += 2f;
+            newPosition.x += 1f;
             transform.position = newPosition;
         }
 

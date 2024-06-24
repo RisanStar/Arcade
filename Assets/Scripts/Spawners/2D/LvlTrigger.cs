@@ -10,7 +10,7 @@ public class LvlTrigger : MonoBehaviour
     private Vector3 berrySpawn;
 
     private float randX;
-    private float randY;
+    private float randZ;
 
     public float randomLvl { get; private set;}
     private void Awake()
@@ -18,18 +18,18 @@ public class LvlTrigger : MonoBehaviour
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
 
-        randX = Random.Range(-10f, 10f);
+        randX = Random.Range(-6f, 2f);
         randX = Mathf.RoundToInt(randX);
 
-        randY = Random.Range(5f, 10f);
-        randY = Mathf.RoundToInt(randY);
+        randZ = Random.Range(2f, 7f);
+        randZ = Mathf.RoundToInt(randZ);
 
-        berrySpawn = new Vector3(randX, randY, transform.position.z);
+        berrySpawn = new Vector3(randX, transform.position.y, randZ);
     }
     private void Start()
     {
         lvlSpawn = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
-        berrySpawn = new Vector3(randX, randY + transform.position.y, transform.position.z);
+        berrySpawn = new Vector3(randX, transform.position.y, transform.position.z + randZ);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

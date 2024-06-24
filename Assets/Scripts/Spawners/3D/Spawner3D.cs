@@ -17,8 +17,8 @@ public class Spawner3D : MonoBehaviour
 
     private void Start()
     {
-        carSpawnPoint = new Vector3(transform.position.x, .6f, transform.position.z);
-        otherSpawnPoint = new Vector3(transform.position.x, 1.4f, transform.position.z);
+        carSpawnPoint = new Vector3(transform.position.x, .2f, transform.position.z);
+        otherSpawnPoint = new Vector3(transform.position.x, 1f, transform.position.z);
         carTimer = 3f;
 
     }
