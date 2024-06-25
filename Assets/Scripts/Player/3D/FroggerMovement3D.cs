@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
@@ -9,41 +10,25 @@ public class FroggerMovement3D : MonoBehaviour
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
 
-    private KeyCode upW = KeyCode.W;
-    private KeyCode upArrow = KeyCode.UpArrow;
+    private readonly KeyCode upW = KeyCode.W;
+    private readonly KeyCode upArrow = KeyCode.UpArrow;
 
-    private KeyCode downS = KeyCode.S;
-    private KeyCode downArrow = KeyCode.DownArrow;
+    private readonly KeyCode downS = KeyCode.S;
+    private readonly KeyCode downArrow = KeyCode.DownArrow;
 
-    private KeyCode leftA = KeyCode.A;
-    private KeyCode leftArrow = KeyCode.LeftArrow;
+    private readonly KeyCode leftA = KeyCode.A;
+    private readonly KeyCode leftArrow = KeyCode.LeftArrow;
 
-    private KeyCode rightD = KeyCode.D;
-    private KeyCode rightArrow = KeyCode.RightArrow;
+    private readonly KeyCode rightD = KeyCode.D;
+    private readonly KeyCode rightArrow = KeyCode.RightArrow;
 
 
     [SerializeField] private GameObject frog;
     [SerializeField] private Animator animator;
     private Vector3 newPosition;
 
-    private List<string> animationList = new List<string>
-                                            {   "Attack",
-                                                "Bounce",
-                                                "Clicked",
-                                                "Death",
-                                                "Eat",
-                                                "Fear",
-                                                "Fly",
-                                                "Hit",
-                                                "Idle_A", "Idle_B", "Idle_C",
-                                                "Jump",
-                                                "Roll",
-                                                "Run",
-                                                "Sit",
-                                                "Spin/Splash",
-                                                "Swim",
-                                                "Walk"
-                                            };
+    private float randomInt;
+    private int pickedIdle;
 
     private void Start()
     {
@@ -98,7 +83,7 @@ public class FroggerMovement3D : MonoBehaviour
             transform.position = newPosition;
         }
 
-        if (transform.position.x > 4f)
+        if (transform.position.x > 0f)
         {
             newPosition.x -= 1f;
             transform.position = newPosition;
@@ -110,19 +95,34 @@ public class FroggerMovement3D : MonoBehaviour
             transform.position = newPosition;
         }
 
+        StartCoroutine(RNG());
         Animation();
         Die();
     }
 
+    private IEnumerator RNG()
+    {
+        yield return new WaitForSeconds(5);
+        randomInt = Random.Range(0f, 3f);
+        randomInt = Mathf.RoundToInt(randomInt);
+        if (randomInt == 0)
+        {
+            pickedIdle = 0;
+        }
+    }
+
     private void Animation()
     {
-        if (TryGetComponent(out animator))
+        if (animator != null)
         {
-            animator.Play("Idle_A");
-
             if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow) || Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow) || Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow) || Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
             {
-                animator.Play("Bounce");
+                animator.SetBool("Moving", true);
+                animator.SetInteger("RandomIdle", pickedIdle);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
             }
         }
     }
