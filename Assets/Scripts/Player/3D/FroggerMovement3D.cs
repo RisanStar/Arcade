@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,9 +23,27 @@ public class FroggerMovement3D : MonoBehaviour
 
 
     [SerializeField] private GameObject frog;
+    [SerializeField] private Animator animator;
     private Vector3 newPosition;
-    private enum MovementState { idle, moving }
 
+    private List<string> animationList = new List<string>
+                                            {   "Attack",
+                                                "Bounce",
+                                                "Clicked",
+                                                "Death",
+                                                "Eat",
+                                                "Fear",
+                                                "Fly",
+                                                "Hit",
+                                                "Idle_A", "Idle_B", "Idle_C",
+                                                "Jump",
+                                                "Roll",
+                                                "Run",
+                                                "Sit",
+                                                "Spin/Splash",
+                                                "Swim",
+                                                "Walk"
+                                            };
 
     private void Start()
     {
@@ -36,7 +55,7 @@ public class FroggerMovement3D : MonoBehaviour
 
     private void Update()
     {
-        newPosition.y = 1f;
+        newPosition.y = -.4f;
 
         if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
         {
@@ -91,7 +110,21 @@ public class FroggerMovement3D : MonoBehaviour
             transform.position = newPosition;
         }
 
+        Animation();
         Die();
+    }
+
+    private void Animation()
+    {
+        if (TryGetComponent(out animator))
+        {
+            animator.Play("Idle_A");
+
+            if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow) || Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow) || Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow) || Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
+            {
+                animator.Play("Bounce");
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -13,8 +13,11 @@ public class LvlTrigger3D : MonoBehaviour
     private float randZ;
 
     public float randomLvl { get; private set;}
-    private void Awake()
+
+    private void Start()
     {
+        lvlSpawn = new Vector3(0, 0, transform.position.z + 30);
+
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
 
@@ -24,12 +27,8 @@ public class LvlTrigger3D : MonoBehaviour
         randZ = Random.Range(5f, 10f);
         randZ = Mathf.RoundToInt(randZ);
 
-        berrySpawn = new Vector3(randX, randZ, transform.position.z);
-    }
-    private void Start()
-    {
-        lvlSpawn = new Vector3(0, 0, transform.position.z + 30);
         berrySpawn = new Vector3(randX, 1, transform.position.z + randZ);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,19 +41,11 @@ public class LvlTrigger3D : MonoBehaviour
             if (randomLvl == 0)
             {
                 Instantiate(lvlVariant[0], lvlSpawn, Quaternion.identity);
-                if (GameObject.Find("Level Variant(1)3D"))
-                {
-                    lvlVariant[0].SetActive(true);
-                }
             }
 
             if (randomLvl == 1)
             {
                 Instantiate(lvlVariant[1], lvlSpawn, Quaternion.identity);
-                if (GameObject.Find("Level Variant(2)3D"))
-                {
-                    lvlVariant[1].SetActive(true);
-                }
             }
         }
 
