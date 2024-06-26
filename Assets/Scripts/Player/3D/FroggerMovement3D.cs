@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class FroggerMovement3D : MonoBehaviour
@@ -22,6 +21,8 @@ public class FroggerMovement3D : MonoBehaviour
     private readonly KeyCode rightD = KeyCode.D;
     private readonly KeyCode rightArrow = KeyCode.RightArrow;
 
+    [SerializeField] private InputAction playerMovement;
+
 
     [SerializeField] private GameObject frog;
     [SerializeField] private Animator animator;
@@ -30,6 +31,14 @@ public class FroggerMovement3D : MonoBehaviour
     private float randomInt;
     private int pickedIdle;
 
+    private void OnEnable()
+    {
+        playerMovement.Enable();
+    }
+    private void OnDisable()
+    {
+        playerMovement.Disable(); 
+    }
     private void Start()
     {
         transform.position = transform.position;
@@ -45,6 +54,7 @@ public class FroggerMovement3D : MonoBehaviour
         if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
         {
             newPosition.z += 1f;
+            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
             canMoveUp = true;
 
@@ -54,6 +64,7 @@ public class FroggerMovement3D : MonoBehaviour
         {
 
             newPosition.z -= 1f;
+            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
             canMoveDown = true;
         }
@@ -61,6 +72,7 @@ public class FroggerMovement3D : MonoBehaviour
         else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
         {
             newPosition.x -= 1f;
+            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
 
         }
@@ -68,6 +80,7 @@ public class FroggerMovement3D : MonoBehaviour
         else if (Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
         {
             newPosition.x += 1f;
+            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
 
         }
