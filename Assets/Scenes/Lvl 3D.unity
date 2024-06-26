@@ -909,12 +909,12 @@ MonoBehaviour:
     - m_Name: WASD
       m_Id: c9012249-3191-4a90-a9db-8cb6578b1900
       m_Path: 3DVector
-      m_Interactions: 
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Player Movement
       m_Flags: 4
-    - m_Name: up
+    - m_Name: forward
       m_Id: b6cfd6f8-4a85-428c-92b2-8c1afced98f5
       m_Path: <Keyboard>/w
       m_Interactions: 
@@ -922,7 +922,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Player Movement
       m_Flags: 8
-    - m_Name: down
+    - m_Name: backward
       m_Id: eed60a79-8c5e-4889-84a2-347864414b85
       m_Path: <Keyboard>/s
       m_Interactions: 
@@ -946,7 +946,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Player Movement
       m_Flags: 8
-    - m_Name: 3D Vector
+    - m_Name: ArrowKeys
       m_Id: 706daeba-625c-4a1e-b39c-9fef8235d0a7
       m_Path: 3DVector
       m_Interactions: 

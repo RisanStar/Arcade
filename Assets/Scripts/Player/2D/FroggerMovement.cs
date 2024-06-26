@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class FroggerMovement : MonoBehaviour
@@ -6,19 +7,6 @@ public class FroggerMovement : MonoBehaviour
     public bool isDead { get; private set; }
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
-
-    private KeyCode upW = KeyCode.W;
-    private KeyCode upArrow = KeyCode.UpArrow;
-
-    private KeyCode downS = KeyCode.S;
-    private KeyCode downArrow = KeyCode.DownArrow;
-
-    private KeyCode leftA = KeyCode.A;
-    private KeyCode leftArrow = KeyCode.LeftArrow;
-
-    private KeyCode rightD = KeyCode.D;
-    private KeyCode rightArrow = KeyCode.RightArrow;
-
 
     [SerializeField] private GameObject frog;
     private Vector2 newPosition;
@@ -36,7 +24,7 @@ public class FroggerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             newPosition.y += 1f;
             frog.transform.position = newPosition;
@@ -44,7 +32,7 @@ public class FroggerMovement : MonoBehaviour
 
         }
 
-        else if (Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow))
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
 
             newPosition.y -= 1f;
@@ -52,14 +40,14 @@ public class FroggerMovement : MonoBehaviour
             canMoveDown = true;
         }
 
-        else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
+        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
             newPosition.x -= 1f;
             frog.transform.position = newPosition;
 
         }
 
-        else if (Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             newPosition.x += 1f;
             frog.transform.position = newPosition;

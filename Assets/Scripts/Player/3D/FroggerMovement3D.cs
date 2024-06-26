@@ -9,20 +9,7 @@ public class FroggerMovement3D : MonoBehaviour
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
 
-    private readonly KeyCode upW = KeyCode.W;
-    private readonly KeyCode upArrow = KeyCode.UpArrow;
-
-    private readonly KeyCode downS = KeyCode.S;
-    private readonly KeyCode downArrow = KeyCode.DownArrow;
-
-    private readonly KeyCode leftA = KeyCode.A;
-    private readonly KeyCode leftArrow = KeyCode.LeftArrow;
-
-    private readonly KeyCode rightD = KeyCode.D;
-    private readonly KeyCode rightArrow = KeyCode.RightArrow;
-
     [SerializeField] private InputAction playerMovement;
-
 
     [SerializeField] private GameObject frog;
     [SerializeField] private Animator animator;
@@ -34,6 +21,7 @@ public class FroggerMovement3D : MonoBehaviour
     private void OnEnable()
     {
         playerMovement.Enable();
+        newPosition = playerMovement.ReadValue<Vector3>();
     }
     private void OnDisable()
     {
@@ -41,7 +29,6 @@ public class FroggerMovement3D : MonoBehaviour
     }
     private void Start()
     {
-        transform.position = transform.position;
         isDead = false;
         canMoveUp = false;
         canMoveDown = false;
@@ -51,36 +38,31 @@ public class FroggerMovement3D : MonoBehaviour
     {
         newPosition.y = -.4f;
 
-        if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow))
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             newPosition.z += 1f;
-            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
             canMoveUp = true;
-
         }
 
-        else if (Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow))
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
 
             newPosition.z -= 1f;
-            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
             canMoveDown = true;
         }
 
-        else if (Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow))
+        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
             newPosition.x -= 1f;
-            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
 
         }
 
-        else if (Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             newPosition.x += 1f;
-            newPosition = playerMovement.ReadValue<Vector3>();
             transform.position = newPosition;
 
         }
@@ -90,53 +72,42 @@ public class FroggerMovement3D : MonoBehaviour
             canMoveDown = false;
         }
 
-        if (transform.position.z < 0f)
+        if (newPosition.z < 0f)
         {
             newPosition.z += 1f;
             transform.position = newPosition;
         }
 
-        if (transform.position.x > 0f)
+        if (newPosition.x > 0f)
         {
             newPosition.x -= 1f;
             transform.position = newPosition;
         }
 
-        if (transform.position.x < -7f)
+        if (newPosition.x < -7f)
         {
             newPosition.x += 1f;
             transform.position = newPosition;
         }
 
-        StartCoroutine(RNG());
         Animation();
         Die();
-    }
-
-    private IEnumerator RNG()
-    {
-        yield return new WaitForSeconds(5);
-        randomInt = Random.Range(0f, 3f);
-        randomInt = Mathf.RoundToInt(randomInt);
-        if (randomInt == 0)
-        {
-            pickedIdle = 0;
-        }
     }
 
     private void Animation()
     {
         if (animator != null)
         {
-            if (Input.GetKeyDown(upW) || Input.GetKeyDown(upArrow) || Input.GetKeyDown(downS) || Input.GetKeyDown(downArrow) || Input.GetKeyDown(leftA) || Input.GetKeyDown(leftArrow) || Input.GetKeyDown(rightD) || Input.GetKeyDown(rightArrow))
+            if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
             {
                 animator.SetBool("Moving", true);
-                animator.SetInteger("RandomIdle", pickedIdle);
+                animator.SetBool("isLanding", true);
             }
             else
             {
                 animator.SetBool("Moving", false);
             }
+            
         }
     }
 
