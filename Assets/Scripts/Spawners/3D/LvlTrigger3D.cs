@@ -4,15 +4,17 @@ using UnityEngine.UIElements;
 public class LvlTrigger3D : MonoBehaviour
 {
     [SerializeField] private GameObject[] lvlVariant;
-    [SerializeField] private GameObject berry;
+    [SerializeField] private GameObject[] fruits;
 
     private Vector3 lvlSpawn;
-    private Vector3 berrySpawn;
+    private Vector3 fruitSpawn;
 
     private float randX;
     private float randZ;
 
     public float randomLvl { get; private set;}
+    private float randomFruit;
+    private int pickedFruit;
 
     private void Start()
     {
@@ -21,13 +23,45 @@ public class LvlTrigger3D : MonoBehaviour
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
 
-        randX = Random.Range(-5f, 5f);
+        randomFruit = Random.Range(0f, 4f);
+        randomFruit = Mathf.RoundToInt(randomFruit);
+
+        randX = Random.Range(-3f, 5f);
         randX = Mathf.RoundToInt(randX);
 
         randZ = Random.Range(5f, 10f);
         randZ = Mathf.RoundToInt(randZ);
 
-        berrySpawn = new Vector3(randX, 1, transform.position.z + randZ);
+        fruitSpawn = new Vector3(randX, 1, transform.position.z + randZ);
+
+    }
+
+    private void Update()
+    {
+        if (randomFruit == 0)
+        {
+            pickedFruit = 0;
+        }
+
+        if (randomFruit == 1)
+        {
+            pickedFruit = 1;
+        }
+
+        if (randomFruit == 2)
+        {
+            pickedFruit = 2;
+        }
+
+        if (randomFruit == 3)
+        {
+            pickedFruit = 3;
+        }
+
+        if (pickedFruit == 4)
+        {
+            pickedFruit = 4;
+        }
 
     }
 
@@ -36,7 +70,7 @@ public class LvlTrigger3D : MonoBehaviour
         if (other.CompareTag("Frog"))
         {
             Debug.Log("Entered Trigger");
-            Instantiate(berry, berrySpawn, Quaternion.identity);
+            Instantiate(fruits[pickedFruit], fruitSpawn, Quaternion.identity);
 
             if (randomLvl == 0)
             {

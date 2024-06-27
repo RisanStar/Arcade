@@ -8,6 +8,7 @@ public class FroggerMovement3D : MonoBehaviour
     public bool isDead { get; private set; }
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
+    private bool onRoad;
 
     [SerializeField] private InputAction playerMovement;
 
@@ -36,8 +37,6 @@ public class FroggerMovement3D : MonoBehaviour
 
     private void Update()
     {
-        newPosition.y = -.4f;
-
         if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             newPosition.z += 1f;
@@ -90,6 +89,15 @@ public class FroggerMovement3D : MonoBehaviour
             transform.position = newPosition;
         }
 
+        if (onRoad == true)
+        {
+            newPosition.y = -.6f;
+        }
+        else
+        {
+            newPosition.y = -.35f;
+        }
+
         Animation();
         Die();
     }
@@ -116,6 +124,16 @@ public class FroggerMovement3D : MonoBehaviour
         if (other.CompareTag("Car"))
         {
             isDead = true;
+        }
+
+        if (other.CompareTag("Road"))
+        {
+            onRoad = true;
+        }
+
+        if (other.CompareTag("Street"))
+        {
+            onRoad = false;
         }
     }
 

@@ -4,27 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class ItemCollect3D : MonoBehaviour
 {
-    private int berryCount;
+    private int fruitCount;
     [SerializeField] private TextMeshProUGUI TMPUGUI;
 
     private void Start()
     {
-        berryCount = 0;
+        fruitCount = 0;
         TMPUGUI.text = "";
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Berry"))
+        if (other.CompareTag("Fruit"))
         {
             Destroy(other.gameObject);
-            berryCount++;
-            TMPUGUI.text = "" + berryCount;
+            fruitCount++;
+            TMPUGUI.text = "" + fruitCount;
         }
     }
 
     private void Update()
     {
-        if(berryCount == 10)
+        if(fruitCount == 10)
         {
             SceneManager.LoadScene("Secret");
         }

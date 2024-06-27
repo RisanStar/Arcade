@@ -7,8 +7,10 @@ TagManager:
   - Car
   - Frog
   - LvlVari
-  - Berry
   - Out of Bounds
+  - Fruit
+  - Road
+  - Street
   layers:
   - Default
   - TransparentFX
