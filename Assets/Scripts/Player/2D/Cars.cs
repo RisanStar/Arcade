@@ -8,6 +8,7 @@ public class Cars : MonoBehaviour
     [SerializeField] private GameObject Right;
 
     [SerializeField] private GameObject car;
+    [SerializeField] private SpriteRenderer carRender;
     private Vector3 carPos;
     
     public bool tooFar { get; private set; }
@@ -39,6 +40,7 @@ public class Cars : MonoBehaviour
 
         if (Right.transform.position.x == carPos.x)
         {
+            carRender.flipX = true;
             rb.velocity += speed * Time.deltaTime * Vector2.left;
         }
 

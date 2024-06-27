@@ -8,7 +8,10 @@ public class Spawner : MonoBehaviour
     public float carTimer;
     public bool canSpawn { get; private set; }
 
-    [SerializeField] private GameObject car;
+    [SerializeField] private GameObject[] cars;
+    private float randomCar;
+    private int pickedCar;
+
     private Vector3 spawnPoint;
 
     private void Start()
@@ -19,9 +22,29 @@ public class Spawner : MonoBehaviour
     }
     private void Update()
     {
+        randomCar = Random.Range(0, cars.Length);
+        randomCar = Mathf.RoundToInt(randomCar);
+
+        if (randomCar == 0)
+        {
+            pickedCar = 0;
+        }
+        else if (randomCar == 1)
+        {
+            pickedCar = 1;
+        }
+        else if (randomCar == 2)
+        {
+            pickedCar = 2;
+        }
+        else
+        {
+            pickedCar = 3;
+        }
+
         if (canSpawn)
         {
-            Instantiate(car, spawnPoint, Quaternion.identity);
+            Instantiate(cars[pickedCar], spawnPoint, Quaternion.identity);
         }
 
         {
