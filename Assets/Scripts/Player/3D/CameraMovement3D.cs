@@ -6,9 +6,13 @@ using UnityEngine;
 public class CameraMovement3D : MonoBehaviour
 {
     [SerializeField] GameObject frog;
+    private Vector3 frogPosition;
+    [SerializeField] private FroggerMovement3D frogerMovement;
 
     private void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, frog.transform.position.z + 3.5f); 
+        frogPosition = new Vector3(frog.transform.position.x + 5f, frog.transform.position.y + 5f, frog.transform.position.z + 5f);
+        transform.position = Vector3.Lerp(transform.position, frogPosition, 1f * Time.deltaTime);
+
     }
 }
