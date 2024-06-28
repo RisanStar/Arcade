@@ -16,9 +16,6 @@ public class FroggerMovement3D : MonoBehaviour
     [SerializeField] private Animator animator;
     private Vector3 newPosition;
 
-    private float randomInt;
-    private int pickedIdle;
-
     private void OnEnable()
     {
         playerMovement.Enable();
@@ -91,7 +88,7 @@ public class FroggerMovement3D : MonoBehaviour
 
         if (onRoad == true)
         {
-            newPosition.y = -.6f;
+            newPosition.y = -.55f;
         }
         else
         {

@@ -23,10 +23,10 @@ public class LvlTrigger3D : MonoBehaviour
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);
 
-        randomFruit = Random.Range(0f, 4f);
+        randomFruit = Random.Range(0f, fruits.Length);
         randomFruit = Mathf.RoundToInt(randomFruit);
 
-        randX = Random.Range(-3f, 5f);
+        randX = Random.Range(-3f, 1f);
         randX = Mathf.RoundToInt(randX);
 
         randZ = Random.Range(5f, 10f);

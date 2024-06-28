@@ -18,7 +18,7 @@ public class ItemCollect3D : MonoBehaviour
         {
             Destroy(other.gameObject);
             fruitCount++;
-            TMPUGUI.text = "" + fruitCount;
+            TMPUGUI.text = "Fruit Collected: " + fruitCount;
         }
     }
 
