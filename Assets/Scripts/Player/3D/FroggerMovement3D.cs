@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,9 +13,14 @@ public class FroggerMovement3D : MonoBehaviour
 
     [SerializeField] private InputAction playerMovement;
 
-    [SerializeField] private GameObject frog;
+    [SerializeField] private Rigidbody frog;
     [SerializeField] private Animator animator;
     private Vector3 newPosition;
+
+    [SerializeField] private ItemCollect3D itemCollect3D;
+    [SerializeField] private GameObject deathScreen;
+    private int lastFruitCount;
+    [SerializeField] private TextMeshProUGUI score;
 
     private void OnEnable()
     {
@@ -30,43 +36,50 @@ public class FroggerMovement3D : MonoBehaviour
         isDead = false;
         canMoveUp = false;
         canMoveDown = false;
+        deathScreen.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (!isDead)
         {
-            newPosition.z += 1f;
-            transform.position = newPosition;
-            canMoveUp = true;
+            if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
+            {
+                newPosition.z += 1f;
+                transform.position = newPosition;
+                canMoveUp = true;
+            }
+
+            else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
+            {
+
+                newPosition.z -= 1f;
+                transform.position = newPosition;
+                canMoveDown = true;
+            }
+
+            else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
+            {
+                newPosition.x -= 1f;
+                transform.position = newPosition;
+
+            }
+
+            else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
+            {
+                newPosition.x += 1f;
+                transform.position = newPosition;
+
+            }
+            else
+            {
+                canMoveUp = false;
+                canMoveDown = false;
+            }
         }
 
-        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
-        {
-
-            newPosition.z -= 1f;
-            transform.position = newPosition;
-            canMoveDown = true;
-        }
-
-        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
-        {
-            newPosition.x -= 1f;
-            transform.position = newPosition;
-
-        }
-
-        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
-        {
-            newPosition.x += 1f;
-            transform.position = newPosition;
-
-        }
-        else
-        {
-            canMoveUp = false;
-            canMoveDown = false;
-        }
 
         if (newPosition.z < 0f)
         {
@@ -106,7 +119,6 @@ public class FroggerMovement3D : MonoBehaviour
             if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
             {
                 animator.SetBool("Moving", true);
-                animator.SetBool("isLanding", true);
             }
             else
             {
@@ -138,8 +150,13 @@ public class FroggerMovement3D : MonoBehaviour
     {
         if (isDead)
         {
-            Destroy(frog);
-            SceneManager.LoadScene("MainGame");
+            lastFruitCount = itemCollect3D.fruitCount;
+            score.text = "" + lastFruitCount;
+            deathScreen.SetActive(true);
+            animator.SetBool("isDead", true);
+            Cursor.lockState = CursorLockMode.None;
+            
+
         }
     }
 }
