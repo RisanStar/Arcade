@@ -5,11 +5,11 @@ public class UIButtons : MonoBehaviour
 {
     public void Retry()
     {
-        SceneManager.LoadScene("MainGame");
+       SceneManager.LoadScene("Lvl 3D"); 
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
 }

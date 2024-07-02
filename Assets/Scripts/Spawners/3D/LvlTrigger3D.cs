@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class LvlTrigger3D : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class LvlTrigger3D : MonoBehaviour
 
     private void Start()
     {
-        lvlSpawn = new Vector3(0, 0, transform.position.z + 30);
+        lvlSpawn = new Vector3(0, 0, transform.position.z + 27);
 
         randomLvl = Random.value;
         randomLvl = Mathf.RoundToInt(randomLvl);

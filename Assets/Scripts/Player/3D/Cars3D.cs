@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class Cars3D : MonoBehaviour

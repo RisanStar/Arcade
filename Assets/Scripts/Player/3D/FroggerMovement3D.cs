@@ -1,8 +1,9 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class FroggerMovement3D : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class FroggerMovement3D : MonoBehaviour
     public bool canMoveDown { get; private set; }
     private bool onRoad;
 
+    [SerializeField] private PlayerControls playerControls;
     [SerializeField] private InputAction playerMovement;
+    [SerializeField] private InputAction playerUIClick;
+    [SerializeField] private InputAction playerUINavi;
 
     [SerializeField] private Rigidbody frog;
     [SerializeField] private Animator animator;
@@ -22,14 +26,32 @@ public class FroggerMovement3D : MonoBehaviour
     private int lastFruitCount;
     [SerializeField] private TextMeshProUGUI score;
 
+    [SerializeField] private Button firstSelected;
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
     private void OnEnable()
     {
+        playerMovement = playerControls.Player.Move;
         playerMovement.Enable();
+
+        playerUIClick = playerControls.UI.Click;
+        playerUIClick.Enable();
+        playerUIClick.performed += Click;
+
+        playerUINavi = playerControls.UI.Navigate;
+        playerUINavi.Enable();
+        playerUINavi.performed += Navigation;
+        
         newPosition = playerMovement.ReadValue<Vector3>();
     }
     private void OnDisable()
     {
         playerMovement.Disable(); 
+        playerUIClick.Disable();
+        playerUINavi.Disable();
     }
     private void Start()
     {
@@ -103,7 +125,8 @@ public class FroggerMovement3D : MonoBehaviour
         {
             newPosition.y = -.55f;
         }
-        else
+        
+        if (onRoad == false) 
         {
             newPosition.y = -.35f;
         }
@@ -144,6 +167,12 @@ public class FroggerMovement3D : MonoBehaviour
         {
             onRoad = false;
         }
+
+        if (other.CompareTag("OOB"))
+        {
+            newPosition.z += 1f;
+            transform.position = newPosition;
+        }
     }
 
     private void Die()
@@ -152,11 +181,25 @@ public class FroggerMovement3D : MonoBehaviour
         {
             lastFruitCount = itemCollect3D.fruitCount;
             score.text = "" + lastFruitCount;
+
             deathScreen.SetActive(true);
             animator.SetBool("isDead", true);
+
             Cursor.lockState = CursorLockMode.None;
             
 
         }
+    }
+
+    private void Navigation(InputAction.CallbackContext context)
+    {
+        firstSelected.Select();
+        Debug.Log("Moving");
+    }
+
+    private void Click(InputAction.CallbackContext context)
+    {
+        Debug.Log("clicking");
+        SceneManager.LoadScene("Lvl 3D");
     }
 }
