@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 576500365854785175}
   - component: {fileID: 6738573634014483936}
   m_Layer: 0
-  m_Name: Level Variant(1)3D 1
+  m_Name: Level Variant(3)3D
   m_TagString: LvlVari
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

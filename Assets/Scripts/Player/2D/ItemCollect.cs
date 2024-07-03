@@ -1,16 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ItemCollect : MonoBehaviour
 {
     private int berryCount;
-    [SerializeField] private TextMeshProUGUI TMPUGUI;
+    [SerializeField] private TextMeshProUGUI berryCountTxt;
 
     private void Start()
     {
         berryCount = 0;
-        TMPUGUI.text = "";
+        berryCountTxt.text = "";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,15 +20,7 @@ public class ItemCollect : MonoBehaviour
         {
             Destroy(collision.gameObject);
             berryCount++;
-            TMPUGUI.text = "" + berryCount;
-        }
-    }
-
-    private void Update()
-    {
-        if(berryCount == 10)
-        {
-            SceneManager.LoadScene("Lvl 3D");
+            berryCountTxt.text = "" + berryCount;
         }
     }
 }

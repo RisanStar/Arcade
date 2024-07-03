@@ -10,12 +10,16 @@ public class FroggerMovement3D : MonoBehaviour
     public bool isDead { get; private set; }
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
+    private bool cantMove;
+
     private bool onRoad;
 
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private InputAction playerMovement;
     [SerializeField] private InputAction playerUIClick;
     [SerializeField] private InputAction playerUINavi;
+    [SerializeField] private InputAction playerExchange;
+    [SerializeField] private InputAction playerContinue;
 
     [SerializeField] private Rigidbody frog;
     [SerializeField] private Animator animator;
@@ -23,8 +27,13 @@ public class FroggerMovement3D : MonoBehaviour
 
     [SerializeField] private ItemCollect3D itemCollect3D;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject cntrlScreen;
+
+
     private int lastFruitCount;
-    [SerializeField] private TextMeshProUGUI score;
+    private int lastScore;
+    [SerializeField] private TextMeshProUGUI lastFruitTxt;
+    [SerializeField] private TextMeshProUGUI lastScoreTxt;
 
     [SerializeField] private Button firstSelected;
 
@@ -36,6 +45,12 @@ public class FroggerMovement3D : MonoBehaviour
     {
         playerMovement = playerControls.Player.Move;
         playerMovement.Enable();
+
+        playerContinue = playerControls.Player.Continue;
+        playerControls.Enable();
+
+        playerExchange = playerControls.Player.Exchange;
+        playerExchange.Enable();
 
         playerUIClick = playerControls.UI.Click;
         playerUIClick.Enable();
@@ -52,20 +67,30 @@ public class FroggerMovement3D : MonoBehaviour
         playerMovement.Disable(); 
         playerUIClick.Disable();
         playerUINavi.Disable();
+        playerExchange.Disable();
+        playerContinue.Disable();
+   
     }
     private void Start()
     {
         isDead = false;
         canMoveUp = false;
         canMoveDown = false;
+        cantMove = true;
+
         deathScreen.SetActive(false);
+        cntrlScreen.SetActive(true);
+
+        playerUIClick.Disable();
+
+        playerContinue.Enable();
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && !cantMove)
         {
             if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
             {
@@ -131,6 +156,13 @@ public class FroggerMovement3D : MonoBehaviour
             newPosition.y = -.35f;
         }
 
+        if (Keyboard.current.tabKey.wasPressedThisFrame || Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.numpad1Key.wasPressedThisFrame)
+        {
+            cantMove = false;
+            playerContinue.Disable();
+            cntrlScreen.SetActive(false);
+        }
+
         Animation();
         Die();
     }
@@ -179,8 +211,14 @@ public class FroggerMovement3D : MonoBehaviour
     {
         if (isDead)
         {
+            playerUIClick.Enable();
+            playerExchange.Disable();
+
             lastFruitCount = itemCollect3D.fruitCount;
-            score.text = "" + lastFruitCount;
+            lastFruitTxt.text = "" + lastFruitCount;
+
+            lastScore = itemCollect3D.scoreCount;
+            lastScoreTxt.text = "" + lastScore;
 
             deathScreen.SetActive(true);
             animator.SetBool("isDead", true);
