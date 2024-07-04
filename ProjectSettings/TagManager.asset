@@ -10,8 +10,9 @@ TagManager:
   - Fruit
   - Road
   - Street
-  - Berry
   - OOB
+  - Out of Bounds
+  - Log
   layers:
   - Default
   - TransparentFX

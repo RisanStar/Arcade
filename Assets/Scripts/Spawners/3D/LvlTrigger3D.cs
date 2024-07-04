@@ -20,10 +20,10 @@ public class LvlTrigger3D : MonoBehaviour
     {
         lvlSpawn = new Vector3(0, 0, transform.position.z + 27);
 
-        randomLvl = Random.value;
+        randomLvl = Random.Range(0f, lvlVariant.Length - 1);
         randomLvl = Mathf.RoundToInt(randomLvl);
 
-        randomFruit = Random.Range(0f, fruits.Length);
+        randomFruit = Random.Range(0f, fruits.Length - 1);
         randomFruit = Mathf.RoundToInt(randomFruit);
 
         randX = Random.Range(-7f, 2f);
@@ -80,6 +80,11 @@ public class LvlTrigger3D : MonoBehaviour
             if (randomLvl == 1)
             {
                 Instantiate(lvlVariant[1], lvlSpawn, Quaternion.identity);
+            }
+
+            if (randomLvl == 2)
+            {
+                Instantiate(lvlVariant[2], lvlSpawn, Quaternion.identity);
             }
         }
 

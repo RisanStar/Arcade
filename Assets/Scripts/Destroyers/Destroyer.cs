@@ -12,7 +12,7 @@ public class Destroyer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Car"))
+        if (other.CompareTag("Car") || other.CompareTag("Log"))
         {
             Destroy(other.gameObject);
         }

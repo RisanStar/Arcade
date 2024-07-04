@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 6075561420275915422}
   - component: {fileID: 9091657973266856324}
   m_Layer: 0
-  m_Name: Level Variant (2)3D
+  m_Name: Level Variant(2)3D
   m_TagString: LvlVari
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,6 +1447,7 @@ MonoBehaviour:
   lvlVariant:
   - {fileID: 4600253434616453380, guid: 5797eee92afd41442ad405ec9cefda96, type: 3}
   - {fileID: 3517037594079042431}
+  - {fileID: 4600253434616453380, guid: 1740383aa5f57d043b880d93ecad5086, type: 3}
   fruits:
   - {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   - {fileID: 1407451490957870, guid: 3ce32ffa6ccf60e4ab65d9e396f43433, type: 3}

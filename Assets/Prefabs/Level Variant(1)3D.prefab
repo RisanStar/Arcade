@@ -106,6 +106,7 @@ MonoBehaviour:
   lvlVariant:
   - {fileID: 4600253434616453380}
   - {fileID: 3517037594079042431, guid: e2f207e9b1dd0004492cf4e439be7501, type: 3}
+  - {fileID: 4600253434616453380, guid: 1740383aa5f57d043b880d93ecad5086, type: 3}
   fruits:
   - {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   - {fileID: 1407451490957870, guid: 3ce32ffa6ccf60e4ab65d9e396f43433, type: 3}
