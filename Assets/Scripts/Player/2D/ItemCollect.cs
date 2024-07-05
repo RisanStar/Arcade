@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ItemCollect : MonoBehaviour
 {
-    private int berryCount;
-    [SerializeField] private TextMeshProUGUI berryCountTxt;
+    private int fruitCount;
+    [SerializeField] private TextMeshProUGUI fruitCountTxt;
 
     private void Start()
     {
-        berryCount = 0;
-        berryCountTxt.text = "";
+        fruitCount = 0;
+        fruitCountTxt.text = "";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Berry"))
+        if (collision.CompareTag("Fruit"))
         {
             Destroy(collision.gameObject);
-            berryCount++;
-            berryCountTxt.text = "" + berryCount;
+            fruitCount++;
+            fruitCountTxt.text = "" + fruitCount;
         }
     }
 }
