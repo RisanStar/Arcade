@@ -1,9 +1,8 @@
-using TMPro;
 using UnityEngine;
 
 public class Cars : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    private float speed;
     [SerializeField] private GameObject Left;
     [SerializeField] private GameObject Right;
 

@@ -5,14 +5,17 @@ using UnityEngine.SceneManagement;
 public class FroggerMovement : MonoBehaviour
 {
     public bool isDead { get; private set; }
+    private bool canDie;
     public bool canMoveUp { get; private set; }
     public bool canMoveDown { get; private set; }
 
     [SerializeField] private GameObject frog;
+
     private Vector2 newPosition;
 
     private enum MovementState { idle, moving }
 
+    [SerializeField] private Logs[] logs;
 
     private void Start()
     {
@@ -20,10 +23,13 @@ public class FroggerMovement : MonoBehaviour
         isDead = false;
         canMoveUp = false;
         canMoveDown = false;
+
     }
 
     private void Update()
     {
+        logs = FindObjectsOfType<Logs>(); 
+
         if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             newPosition.y += 1f;
@@ -73,6 +79,23 @@ public class FroggerMovement : MonoBehaviour
         if (collision.CompareTag("Car"))
         {
             isDead = true;
+        }
+
+        if (collision.CompareTag("Log"))
+        {
+            canDie = false;
+        }
+        else
+        {
+            canDie = true;
+        }
+
+        if(canDie == true)
+        {
+            if (collision.CompareTag("Water"))
+            {
+                isDead = true;
+            }
         }
     }
 

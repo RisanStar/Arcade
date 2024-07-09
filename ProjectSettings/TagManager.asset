@@ -13,6 +13,7 @@ TagManager:
   - OOB
   - Out of Bounds
   - Log
+  - Water
   layers:
   - Default
   - TransparentFX

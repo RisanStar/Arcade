@@ -17,40 +17,41 @@ public class LogSpawner : MonoBehaviour
     private void Start()
     {
         spawnPoint = transform.position;
-        logTimer = 2f;
+        logTimer = 1.3f;
 
     }
     private void Update()
     {
-        randomLog = Random.Range(0, logs.Length);
+        randomLog = Random.value;
         randomLog = Mathf.RoundToInt(randomLog);
+        Debug.Log(randomLog);
 
         if (randomLog == 0)
         {
             pickedLog = 0;
         }
-        else
+        if (randomLog == 1)
         {
             pickedLog = 1;
+        }
 
 
-            if (canSpawn)
+        if (canSpawn)
+        {
+            Instantiate(logs[pickedLog], spawnPoint, Quaternion.identity);
+        }
+
+        {
+            logCount -= 1f * Time.deltaTime;
+            if (logCount <= 0f) { logCount = 0f; }
+            if (logCount == 0f)
             {
-                Instantiate(logs[pickedLog], spawnPoint, Quaternion.identity);
+                canSpawn = true;
+                logCount += logTimer;
             }
+            else
+                canSpawn = false;
 
-            {
-                logCount -= 1f * Time.deltaTime;
-                if (logCount <= 0f) { logCount = 0f; }
-                if (logCount == 0f)
-                {
-                    canSpawn = true;
-                    logCount += logTimer;
-                }
-                else
-                    canSpawn = false;
-
-            }
         }
     }
-}
+    }
